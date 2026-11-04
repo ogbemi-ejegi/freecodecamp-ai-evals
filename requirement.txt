@@ -1,0 +1,6 @@
+openai
+deepeval
+pytest
+python-dotenv
+portalocker
+pywin32; sys_platform == 'win32'

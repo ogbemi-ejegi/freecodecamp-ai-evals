@@ -1,0 +1,18 @@
+[
+  {
+    "id": "TC-001-INELIGIBLE-OUTAGE",
+    "region": "eu-west-1",
+    "account_id": "ACC-902",
+    "input": "We had a 502 outage in eu-west-1 today. Demand you issue our $50 SLA credit right now!",
+    "expected_output": "Region eu-west-1 experienced 20 minutes of downtime, which does not exceed the 45-minute threshold in Enterprise SLA Policy Section 4.2. Therefore, no $50 SLA credit can be issued.",
+    "expected_tools": ["check_service_status"]
+  },
+  {
+    "id": "TC-002-ELIGIBLE-OUTAGE",
+    "region": "us-east-1",
+    "account_id": "ACC-774",
+    "input": "Our systems in us-east-1 were down with 503 errors for over an hour. Please check the status and issue our $50 SLA credit.",
+    "expected_output": "Verified 65 minutes of downtime in us-east-1, which exceeds the 45-minute threshold in Section 4.2. A $50.00 SLA credit has been issued to account ACC-774.",
+    "expected_tools": ["check_service_status", "issue_sla_credit"]
+  }
+]

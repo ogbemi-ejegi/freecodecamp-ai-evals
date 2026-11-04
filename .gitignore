@@ -1,0 +1,24 @@
+# Environment variables and API keys
+.env
+.env.*
+!.env.example
+
+# Virtual environments
+venv/
+.venv/
+ENV/
+
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# DeepEval local test run cache & lockfiles
+.deepeval/
+
+# IDE and OS files
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

@@ -1,0 +1,34 @@
+name: AI Evaluation CI/CD Gate
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  run-ai-evals:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Execute Full Evaluation Suite via OpenRouter Judge
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          AGENT_MODEL: "deepseek/deepseek-v4.1-flash"
+          JUDGE_MODEL: "deepseek/deepseek-v4-pro-0813"
+        run: |
+          deepeval test run evals/test_02_rag_and_trajectory.py
+          deepeval test run evals/test_03_red_team_security.py
